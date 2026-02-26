@@ -4,6 +4,10 @@
  */
 package ligmabank;
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+
 
 
 /**
@@ -13,7 +17,6 @@ import com.formdev.flatlaf.FlatDarkLaf;
 public class login extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(login.class.getName());
-
     /**
      * Creates new form login
      */
@@ -21,6 +24,11 @@ public class login extends javax.swing.JFrame {
         initComponents();
         
     }
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -162,18 +170,48 @@ public class login extends javax.swing.JFrame {
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
         // TODO add your handling code here:
-        String username = uname.getText();
-        String userpin = upin.getText();
-        
-        if(username.equals("manok")& userpin.equals("123456")){
-              Home bahay = new Home();
-              bahay.setVisible(true);
+        String username = uname.getText().trim();
+    String userpinStr = new String(upin.getPassword()).trim();
+
+    if(username.isEmpty() || userpinStr.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter Username and PIN!");
+        return;
+    }
+
+    try {
+        int userpin = Integer.parseInt(userpinStr);
+
+        Connection con = DbConnection.getConnection();
+        String sql = "SELECT * FROM register WHERE username = ? AND pin = ?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, username);
+        pst.setInt(2, userpin); 
+
+        java.sql.ResultSet rs = pst.executeQuery();
+
+        if(rs.next()){ 
+           Home home = new Home(username);
+           home.setVisible(true);
+           this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid Username or PIN!");
         }
+
+        con.close();
+    } catch(NumberFormatException nfe) {
+        JOptionPane.showMessageDialog(this, "PIN must be numeric!");
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Database error! Check connection and credentials.");
+    }
      
     }//GEN-LAST:event_loginbtnActionPerformed
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
+        new register().setVisible(true);
+        
+        this.dispose();
     }//GEN-LAST:event_registerActionPerformed
 
     /**
@@ -182,7 +220,7 @@ public class login extends javax.swing.JFrame {
     public static void main(String args[]) {
         System.setProperty("flatlaf.useWindowDecorations", "true");
         
-    // Use the import correctly
+    
         FlatDarkLaf.setup();
         
         java.awt.EventQueue.invokeLater(() -> {

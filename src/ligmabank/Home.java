@@ -5,7 +5,10 @@
 package ligmabank;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JLabel;
 /**
  *
  * @author Alejandro
@@ -14,12 +17,58 @@ public class Home extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Home.class.getName());
 
-    /**
-     * Creates new form Home
-     */
+     private String username;
+    private JLabel welcomeLabel;
+
+   
+   public Home(String username) {
+    this.username = username;
+    initComponents();
+    jLabel4.setText("Ayo," +username+"!"); 
+    loadBalance();
+}       
+
+    // Default constructor (optional)
     public Home() {
         initComponents();
     }
+
+     private void loadBalance() {
+        try {
+            System.out.println("Username: " + username);
+
+            Connection con = DbConnection.getConnection();
+
+            if (con == null) {
+                System.out.println("Connection is NULL");
+                return;
+            }
+
+            String sql = "SELECT balance FROM register WHERE username = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, username);
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                double bal = rs.getDouble("balance");
+                System.out.println("Balance from DB: " + bal);
+                balance.setText(String.format("%,.2f", bal));
+            } else {
+                System.out.println("No user found in database.");
+            }
+
+            rs.close();
+            pst.close();
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+        /**
+         * Creates new form Home
+         */ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,7 +101,7 @@ public class Home extends javax.swing.JFrame {
         jScrollBar1 = new javax.swing.JScrollBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(793, 800));
+        setPreferredSize(new java.awt.Dimension(800, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 800));
 
@@ -72,7 +121,7 @@ public class Home extends javax.swing.JFrame {
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(7, Short.MAX_VALUE)
                 .addComponent(logo)
                 .addContainerGap())
         );
@@ -149,6 +198,7 @@ public class Home extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(31, 130, 44));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/deposit.png"))); // NOI18N
         jButton4.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton4.addActionListener(this::jButton4ActionPerformed);
 
         jButton7.setBackground(new java.awt.Color(31, 130, 44));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/send money.png"))); // NOI18N
@@ -290,7 +340,7 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -311,13 +361,17 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void mainHome(String args[]) {
+    public static void main(String args[]) {
         System.setProperty("flatlaf.useWindowDecorations", "true");
         
-        // Use the import correctly
+        
         FlatDarkLaf.setup();
         
         java.awt.EventQueue.invokeLater(() -> {
@@ -354,4 +408,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
+
+   
+
+    
+
 }
+
