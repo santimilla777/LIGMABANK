@@ -28,21 +28,179 @@ public class withdraw extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        withdrawAmount = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        withdraw = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        withdrawLocation = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(800, 800));
+
+        jLabel4.setFont(new java.awt.Font("Accura-Black", 1, 60)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Withdraw");
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        withdrawAmount.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        withdrawAmount.setForeground(new java.awt.Color(179, 202, 179));
+        withdrawAmount.setName("username"); // NOI18N
+        withdrawAmount.addActionListener(this::withdrawAmountActionPerformed);
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel2.setText("Amount:");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bank logo 1 for oop proj smol.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(246, 246, 246)
+                .addComponent(jLabel1)
+                .addContainerGap(254, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
+        );
+
+        withdraw.setBackground(new java.awt.Color(31, 130, 44));
+        withdraw.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        withdraw.setForeground(new java.awt.Color(179, 202, 179));
+        withdraw.setText("Withdraw");
+        withdraw.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        withdraw.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        withdraw.setName("login"); // NOI18N
+        withdraw.addActionListener(this::withdrawActionPerformed);
+
+        jLabel3.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(145, 145, 145));
+        jLabel3.setText("Deposit your money here!");
+
+        withdrawLocation.setBackground(new java.awt.Color(18, 30, 49));
+        withdrawLocation.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        withdrawLocation.setForeground(new java.awt.Color(179, 202, 179));
+        withdrawLocation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LIGMABANK - DASMARINAS", "LIGMABANK - WalMart Oakmont Blvd - Fort Worth, TX", "LIGMABANK - Osaka", "LIGMABANK - New Mexico - Pampanga" }));
+        withdrawLocation.addActionListener(this::withdrawLocationActionPerformed);
+
+        jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel5.setText("Select Withdraw Location:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(withdrawLocation, 0, 0, Short.MAX_VALUE)
+                    .addComponent(withdrawAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(withdraw, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(44, 44, 44)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(withdrawAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(withdrawLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(withdraw)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void withdrawAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_withdrawAmountActionPerformed
+
+    private void withdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawActionPerformed
+        // TODO add your handling code here:
+        String username = withdrawAmount.getText().trim();
+        String userpinStr = new String(upin.getPassword()).trim();
+
+        if(username.isEmpty() || userpinStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Username and PIN!");
+            return;
+        }
+
+        try {
+            int userpin = Integer.parseInt(userpinStr);
+
+            Connection con = DbConnection.getConnection();
+            String sql = "SELECT * FROM register WHERE username = ? AND pin = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, username);
+            pst.setInt(2, userpin);
+
+            java.sql.ResultSet rs = pst.executeQuery();
+
+            if(rs.next()){
+                Home home = new Home(username);
+                home.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid Username or PIN!");
+            }
+
+            con.close();
+        } catch(NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "PIN must be numeric!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error! Check connection and credentials.");
+        }
+    }//GEN-LAST:event_withdrawActionPerformed
+
+    private void withdrawLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawLocationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_withdrawLocationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +228,15 @@ public class withdraw extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton withdraw;
+    private javax.swing.JTextField withdrawAmount;
+    private javax.swing.JComboBox<String> withdrawLocation;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,21 +28,186 @@ public class transfer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        selectBank = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        selectBank1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        accnum = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        bankTransferAmount = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        accname = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        banktransfersend = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+
+        selectBank.setBackground(new java.awt.Color(18, 30, 49));
+        selectBank.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        selectBank.setForeground(new java.awt.Color(179, 202, 179));
+        selectBank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maya Bank", "Gotyme Bank", "UNO Digital Bank", "LIGMABANK ", "G-Xchange, Inc." }));
+        selectBank.addActionListener(this::selectBankActionPerformed);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 800));
+        setSize(new java.awt.Dimension(800, 800));
+
+        jLabel4.setFont(new java.awt.Font("Accura-Black", 1, 60)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Bank Transfer");
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(145, 145, 145));
+        jLabel2.setText("Send your money to other bank account");
+
+        selectBank1.setBackground(new java.awt.Color(18, 30, 49));
+        selectBank1.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        selectBank1.setForeground(new java.awt.Color(179, 202, 179));
+        selectBank1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select Bank-", "Maya Bank", "Gotyme Bank", "UNO Digital Bank", "G-Xchange, Inc." }));
+        selectBank1.addActionListener(this::selectBank1ActionPerformed);
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel3.setText("Select Bank:");
+
+        accnum.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        accnum.setForeground(new java.awt.Color(179, 202, 179));
+        accnum.setName("username"); // NOI18N
+        accnum.addActionListener(this::accnumActionPerformed);
+
+        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel6.setText("Account Number:");
+
+        bankTransferAmount.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        bankTransferAmount.setForeground(new java.awt.Color(179, 202, 179));
+        bankTransferAmount.setName("username"); // NOI18N
+        bankTransferAmount.addActionListener(this::bankTransferAmountActionPerformed);
+
+        jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel7.setText("Amount:");
+
+        accname.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        accname.setForeground(new java.awt.Color(179, 202, 179));
+        accname.setName("username"); // NOI18N
+        accname.addActionListener(this::accnameActionPerformed);
+
+        jLabel8.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel8.setText("Account Name:");
+
+        banktransfersend.setBackground(new java.awt.Color(31, 130, 44));
+        banktransfersend.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        banktransfersend.setForeground(new java.awt.Color(179, 202, 179));
+        banktransfersend.setText("Send");
+        banktransfersend.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        banktransfersend.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        banktransfersend.setName("login"); // NOI18N
+        banktransfersend.addActionListener(this::banktransfersendActionPerformed);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bank logo 1 for oop proj smol.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(248, 248, 248)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selectBank1, 0, 0, Short.MAX_VALUE)
+                    .addComponent(accnum, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                    .addComponent(bankTransferAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(banktransfersend, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(accname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectBank1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(accnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(accname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bankTransferAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(banktransfersend)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void selectBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBankActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectBankActionPerformed
+
+    private void selectBank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBank1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectBank1ActionPerformed
+
+    private void accnumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accnumActionPerformed
+
+    private void bankTransferAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankTransferAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankTransferAmountActionPerformed
+
+    private void accnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accnameActionPerformed
+
+    private void banktransfersendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_banktransfersendActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_banktransfersendActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +235,19 @@ public class transfer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField accname;
+    private javax.swing.JTextField accnum;
+    private javax.swing.JTextField bankTransferAmount;
+    private javax.swing.JButton banktransfersend;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> selectBank;
+    private javax.swing.JComboBox<String> selectBank1;
     // End of variables declaration//GEN-END:variables
 }

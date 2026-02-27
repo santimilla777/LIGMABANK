@@ -4,6 +4,9 @@
  */
 package ligmabank;
 
+import com.sun.jdi.connect.spi.Connection;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Main
@@ -28,21 +31,211 @@ public class deposit extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        selectBank = new javax.swing.JComboBox<>();
+        accname = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        accnum = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        depositAmount = new javax.swing.JTextField();
+        deposit = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setSize(new java.awt.Dimension(800, 800));
+
+        jLabel4.setFont(new java.awt.Font("Accura-Black", 1, 60)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Deposit to Account");
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(145, 145, 145));
+        jLabel2.setText("Deposit your money here!");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bank logo 1 for oop proj smol.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(246, 246, 246)
+                .addComponent(jLabel1)
+                .addContainerGap(254, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
+        );
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel3.setText("Select Bank (Sender):");
+
+        selectBank.setBackground(new java.awt.Color(18, 30, 49));
+        selectBank.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        selectBank.setForeground(new java.awt.Color(179, 202, 179));
+        selectBank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Select Bank-", "Maya Bank", "Gotyme Bank", "UNO Digital Bank", "LIGMABANK ", "G-Xchange, Inc." }));
+        selectBank.addActionListener(this::selectBankActionPerformed);
+
+        accname.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        accname.setForeground(new java.awt.Color(179, 202, 179));
+        accname.setName("username"); // NOI18N
+        accname.addActionListener(this::accnameActionPerformed);
+
+        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel6.setText("Account Number:");
+
+        accnum.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        accnum.setForeground(new java.awt.Color(179, 202, 179));
+        accnum.setName("username"); // NOI18N
+        accnum.addActionListener(this::accnumActionPerformed);
+
+        jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel7.setText("Account Name:");
+
+        jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(179, 202, 179));
+        jLabel5.setText("Amount:");
+
+        depositAmount.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
+        depositAmount.setForeground(new java.awt.Color(179, 202, 179));
+        depositAmount.setName("username"); // NOI18N
+        depositAmount.addActionListener(this::depositAmountActionPerformed);
+
+        deposit.setBackground(new java.awt.Color(31, 130, 44));
+        deposit.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        deposit.setForeground(new java.awt.Color(179, 202, 179));
+        deposit.setText("Deposit");
+        deposit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        deposit.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        deposit.setName("login"); // NOI18N
+        deposit.addActionListener(this::depositActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selectBank, 0, 0, Short.MAX_VALUE)
+                    .addComponent(accname, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                    .addComponent(accnum, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(depositAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectBank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(accnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(accname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(depositAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deposit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void depositAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_depositAmountActionPerformed
+
+    private void selectBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBankActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectBankActionPerformed
+
+    private void accnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accnameActionPerformed
+
+    private void accnumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accnumActionPerformed
+
+    private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
+        // TODO add your handling code here:
+        String username = depositAmount.getText().trim();
+        String userpinStr = new String(upin.getPassword()).trim();
+
+        if(username.isEmpty() || userpinStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Username and PIN!");
+            return;
+        }
+
+        try {
+            int userpin = Integer.parseInt(userpinStr);
+
+            Connection con = DbConnection.getConnection();
+            String sql = "SELECT * FROM register WHERE username = ? AND pin = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, username);
+            pst.setInt(2, userpin);
+
+            java.sql.ResultSet rs = pst.executeQuery();
+
+            if(rs.next()){
+                Home home = new Home(username);
+                home.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid Username or PIN!");
+            }
+
+            con.close();
+        } catch(NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "PIN must be numeric!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error! Check connection and credentials.");
+        }
+    }//GEN-LAST:event_depositActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +263,18 @@ public class deposit extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField accname;
+    private javax.swing.JTextField accnum;
+    private javax.swing.JButton deposit;
+    private javax.swing.JTextField depositAmount;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> selectBank;
     // End of variables declaration//GEN-END:variables
 }
