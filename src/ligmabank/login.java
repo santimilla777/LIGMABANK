@@ -231,7 +231,7 @@ public class login extends javax.swing.JFrame {
         );
         frame.setVisible(true);
               
-     
+     heto na wahh;
     });
     }
 
