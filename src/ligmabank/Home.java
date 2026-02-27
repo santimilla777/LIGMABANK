@@ -202,10 +202,12 @@ public class Home extends javax.swing.JFrame {
         jButton7.setBackground(new java.awt.Color(31, 130, 44));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/send money.png"))); // NOI18N
         jButton7.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton7.addActionListener(this::jButton7ActionPerformed);
 
         jButton8.setBackground(new java.awt.Color(31, 130, 44));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bank transfer.png"))); // NOI18N
         jButton8.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton8.addActionListener(this::jButton8ActionPerformed);
 
         jButton9.setBackground(new java.awt.Color(31, 130, 44));
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/loans.png"))); // NOI18N
@@ -243,7 +245,7 @@ public class Home extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(179, 202, 179));
-        jLabel6.setText("Send Money");
+        jLabel6.setText("Withdraw");
         jLabel6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel7.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
@@ -358,11 +360,34 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        
+        new loan().setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        
+        new deposit().setVisible(true);
+        this.dispose();
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        
+       new withdraw().setVisible(true);
+       this.dispose();
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        new transfer().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
