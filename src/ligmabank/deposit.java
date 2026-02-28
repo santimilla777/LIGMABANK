@@ -44,7 +44,7 @@ public class deposit extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         depositAmount = new javax.swing.JTextField();
         deposit = new javax.swing.JButton();
-        backBTN = new javax.swing.JButton();
+        backbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -125,14 +125,14 @@ public class deposit extends javax.swing.JFrame {
         deposit.setName("login"); // NOI18N
         deposit.addActionListener(this::depositActionPerformed);
 
-        backBTN.setBackground(new java.awt.Color(31, 130, 44));
-        backBTN.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
-        backBTN.setForeground(new java.awt.Color(179, 202, 179));
-        backBTN.setText("Back");
-        backBTN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        backBTN.setMargin(new java.awt.Insets(3, 14, 3, 12));
-        backBTN.setName("login"); // NOI18N
-        backBTN.addActionListener(this::backBTNActionPerformed);
+        backbtn.setBackground(new java.awt.Color(31, 130, 44));
+        backbtn.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        backbtn.setForeground(new java.awt.Color(179, 202, 179));
+        backbtn.setText("Back");
+        backbtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        backbtn.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        backbtn.setName("login"); // NOI18N
+        backbtn.addActionListener(this::backbtnActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,7 +156,7 @@ public class deposit extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(depositAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(backBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -186,7 +186,7 @@ public class deposit extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(deposit)
-                    .addComponent(backBTN))
+                    .addComponent(backbtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -250,9 +250,12 @@ public class deposit extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_depositActionPerformed
 
-    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+    private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_backBTNActionPerformed
+        
+       new Home().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_backbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,7 +285,7 @@ public class deposit extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField accname;
     private javax.swing.JTextField accnum;
-    private javax.swing.JButton backBTN;
+    private javax.swing.JButton backbtn;
     private javax.swing.JButton deposit;
     private javax.swing.JTextField depositAmount;
     private javax.swing.JLabel jLabel1;

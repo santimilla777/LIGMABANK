@@ -224,6 +224,9 @@ public class transfer extends javax.swing.JFrame {
 
     private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
         // TODO add your handling code here:
+        
+        new Home().setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_backBTNActionPerformed
 
     /**
