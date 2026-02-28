@@ -18,7 +18,7 @@ public class deposit extends javax.swing.JFrame {
     /**
      * Creates new form deposit
      */
-    public deposit() {
+    public deposit(String username) {
         initComponents();
     }
 
@@ -279,7 +279,7 @@ public class deposit extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new deposit().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new deposit(username).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

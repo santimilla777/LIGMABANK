@@ -15,6 +15,8 @@ public class withdraw extends javax.swing.JFrame {
     /**
      * Creates new form withdraw
      */
+    
+    
     public withdraw() {
         initComponents();
     }
@@ -195,7 +197,7 @@ public class withdraw extends javax.swing.JFrame {
             java.sql.ResultSet rs = pst.executeQuery();
 
             if(rs.next()){
-                Home home = new Home(username);
+                Home home = new Home();
                 home.setVisible(true);
                 this.dispose();
             } else {

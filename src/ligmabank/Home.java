@@ -35,36 +35,21 @@ public class Home extends javax.swing.JFrame {
 
      private void loadBalance() {
         try {
-            System.out.println("Username: " + username);
+        Connection con = DbConnection.getConnection();
+        String sql = "SELECT balance FROM register WHERE username = ?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, username);
+        ResultSet rs = pst.executeQuery();
 
-            Connection con = DbConnection.getConnection();
-
-            if (con == null) {
-                System.out.println("Connection is NULL");
-                return;
-            }
-
-            String sql = "SELECT balance FROM register WHERE username = ?";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, username);
-
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                double bal = rs.getDouble("balance");
-                System.out.println("Balance from DB: " + bal);
-                balance.setText(String.format("%,.2f", bal));
-            } else {
-                System.out.println("No user found in database.");
-            }
-
-            rs.close();
-            pst.close();
-            con.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (rs.next()) {
+            balance = rs.getDouble("balance");
         }
+        rs.close();
+        pst.close();
+        con.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }
         /**
          * Creates new form Home
@@ -369,7 +354,7 @@ public class Home extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-        new deposit().setVisible(true);
+        new deposit(username).setVisible(true);
         this.dispose();
         
         
