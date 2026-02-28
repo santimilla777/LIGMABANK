@@ -17,6 +17,7 @@ public class transfer extends javax.swing.JFrame {
      */
     public transfer() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**

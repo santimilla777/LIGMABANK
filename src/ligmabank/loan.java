@@ -17,6 +17,7 @@ public class loan extends javax.swing.JFrame {
      */
     public loan() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
