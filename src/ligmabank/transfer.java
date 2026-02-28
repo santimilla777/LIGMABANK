@@ -42,6 +42,7 @@ public class transfer extends javax.swing.JFrame {
         banktransfersend = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        backBTN = new javax.swing.JButton();
 
         selectBank.setBackground(new java.awt.Color(18, 30, 49));
         selectBank.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
@@ -128,6 +129,15 @@ public class transfer extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
+        backBTN.setBackground(new java.awt.Color(31, 130, 44));
+        backBTN.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        backBTN.setForeground(new java.awt.Color(179, 202, 179));
+        backBTN.setText("Back");
+        backBTN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        backBTN.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        backBTN.setName("login"); // NOI18N
+        backBTN.addActionListener(this::backBTNActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,7 +159,8 @@ public class transfer extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(backBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(banktransfersend, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(accname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
                 .addContainerGap())
@@ -177,7 +188,9 @@ public class transfer extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bankTransferAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(banktransfersend)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(banktransfersend)
+                    .addComponent(backBTN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -209,6 +222,10 @@ public class transfer extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_banktransfersendActionPerformed
 
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backBTNActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,6 +254,7 @@ public class transfer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField accname;
     private javax.swing.JTextField accnum;
+    private javax.swing.JButton backBTN;
     private javax.swing.JTextField bankTransferAmount;
     private javax.swing.JButton banktransfersend;
     private javax.swing.JLabel jLabel1;

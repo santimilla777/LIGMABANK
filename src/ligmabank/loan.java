@@ -41,6 +41,7 @@ public class loan extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        backBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 800));
@@ -87,7 +88,7 @@ public class loan extends javax.swing.JFrame {
         deposit.setBackground(new java.awt.Color(31, 130, 44));
         deposit.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         deposit.setForeground(new java.awt.Color(179, 202, 179));
-        deposit.setText("Deposit");
+        deposit.setText("Submit");
         deposit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         deposit.setMargin(new java.awt.Insets(3, 14, 3, 12));
         deposit.setName("login"); // NOI18N
@@ -121,6 +122,15 @@ public class loan extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        backBTN.setBackground(new java.awt.Color(31, 130, 44));
+        backBTN.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        backBTN.setForeground(new java.awt.Color(179, 202, 179));
+        backBTN.setText("Back");
+        backBTN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        backBTN.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        backBTN.setName("login"); // NOI18N
+        backBTN.addActionListener(this::backBTNActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,7 +141,8 @@ public class loan extends javax.swing.JFrame {
                     .addComponent(accnum, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addComponent(accnum2, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(backBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(accnum3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -172,7 +183,9 @@ public class loan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(accnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deposit)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deposit)
+                    .addComponent(backBTN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,6 +252,10 @@ public class loan extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_accnum3ActionPerformed
 
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backBTNActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,22 +286,15 @@ public class loan extends javax.swing.JFrame {
     private javax.swing.JTextField accnum1;
     private javax.swing.JTextField accnum2;
     private javax.swing.JTextField accnum3;
+    private javax.swing.JButton backBTN;
     private javax.swing.JButton deposit;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }

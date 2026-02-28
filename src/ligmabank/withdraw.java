@@ -38,6 +38,7 @@ public class withdraw extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         withdrawLocation = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        backBTN = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,6 +111,15 @@ public class withdraw extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(179, 202, 179));
         jLabel5.setText("Select Withdraw Location:");
 
+        backBTN.setBackground(new java.awt.Color(31, 130, 44));
+        backBTN.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        backBTN.setForeground(new java.awt.Color(179, 202, 179));
+        backBTN.setText("Back");
+        backBTN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        backBTN.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        backBTN.setName("login"); // NOI18N
+        backBTN.addActionListener(this::backBTNActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,7 +131,8 @@ public class withdraw extends javax.swing.JFrame {
                     .addComponent(withdrawLocation, 0, 0, Short.MAX_VALUE)
                     .addComponent(withdrawAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(backBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(withdraw, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,12 +153,14 @@ public class withdraw extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(withdrawAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(withdrawLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(withdraw)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(withdraw)
+                    .addComponent(backBTN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -202,6 +215,10 @@ public class withdraw extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_withdrawLocationActionPerformed
 
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backBTNActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -228,6 +245,7 @@ public class withdraw extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBTN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/netbeanporjz/LIGMABANK/src/ligmabank/DbConnection.java</file>
-            <file>file:/C:/netbeanporjz/LIGMABANK/src/ligmabank/Home.java</file>
-            <file>file:/C:/netbeanporjz/LIGMABANK/src/ligmabank/login.java</file>
-            <file>file:/C:/netbeanporjz/LIGMABANK/src/ligmabank/register.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/NetBeansProjects/Ligmabank/src/ligmabank/Home.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/NetBeansProjects/Ligmabank/src/ligmabank/register.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/NetBeansProjects/Ligmabank/src/ligmabank/loan.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/NetBeansProjects/Ligmabank/src/ligmabank/deposit.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/NetBeansProjects/Ligmabank/src/ligmabank/transfer.java</file>
+            <file>file:/C:/Users/Alejandro/Documents/NetBeansProjects/Ligmabank/src/ligmabank/withdraw.java</file>
         </group>
     </open-files>
 </project-private>
