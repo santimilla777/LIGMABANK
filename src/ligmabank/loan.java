@@ -46,7 +46,6 @@ private String username;
         backBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 800));
 
@@ -85,7 +84,7 @@ private String username;
 
         jLabel9.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(179, 202, 179));
-        jLabel9.setText("Address:");
+        jLabel9.setText("Purpose:");
 
         deposit.setBackground(new java.awt.Color(31, 130, 44));
         deposit.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N

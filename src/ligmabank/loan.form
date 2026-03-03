@@ -197,7 +197,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="b3" green="ca" red="b3" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Address:"/>
+        <Property name="text" type="java.lang.String" value="Purpose:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="deposit">

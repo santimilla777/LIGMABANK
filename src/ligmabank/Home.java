@@ -421,8 +421,8 @@ transactionTable.setModel(transactionTableModel);
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        accountNumber1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 24)); // NOI18N
-        accountNumber1.setForeground(new java.awt.Color(255, 255, 255));
+        accountNumber1.setFont(new java.awt.Font("Accura-Black", 0, 24)); // NOI18N
+        accountNumber1.setForeground(new java.awt.Color(179, 202, 179));
         accountNumber1.setText("AccNo.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
