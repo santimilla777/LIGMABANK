@@ -5,6 +5,7 @@
 package ligmabank;
 
 
+
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,7 @@ public class deposit extends javax.swing.JFrame {
     public deposit(String username) {
         initComponents();
         this.username = username;
+        
     }
 
     /**
@@ -36,10 +38,6 @@ public class deposit extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        accname = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        accnum = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         depositAmount = new javax.swing.JTextField();
         deposit = new javax.swing.JButton();
@@ -78,24 +76,6 @@ public class deposit extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        accname.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
-        accname.setForeground(new java.awt.Color(179, 202, 179));
-        accname.setName("username"); // NOI18N
-        accname.addActionListener(this::accnameActionPerformed);
-
-        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(179, 202, 179));
-        jLabel6.setText("Account Number:");
-
-        accnum.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
-        accnum.setForeground(new java.awt.Color(179, 202, 179));
-        accnum.setName("username"); // NOI18N
-        accnum.addActionListener(this::accnumActionPerformed);
-
-        jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(179, 202, 179));
-        jLabel7.setText("Account Name:");
-
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(179, 202, 179));
         jLabel5.setText("Amount:");
@@ -128,29 +108,23 @@ public class deposit extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(accnum, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-            .addComponent(accname, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-            .addComponent(depositAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(depositAmount)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(0, 239, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,15 +132,7 @@ public class deposit extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(accnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(accname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(depositAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,7 +140,7 @@ public class deposit extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backbtn)
                     .addComponent(deposit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -186,14 +152,6 @@ public class deposit extends javax.swing.JFrame {
     private void depositAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositAmountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_depositAmountActionPerformed
-
-    private void accnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_accnameActionPerformed
-
-    private void accnumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_accnumActionPerformed
 
     private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
         // TODO add your handling code here:
@@ -214,7 +172,7 @@ public class deposit extends javax.swing.JFrame {
 
         java.sql.Connection con = DbConnection.getConnection();
 
-        // Update balance
+      
         String sql = "UPDATE register SET balance = balance + ? WHERE username = ?";
         java.sql.PreparedStatement pst = con.prepareStatement(sql);
         pst.setDouble(1, amount);
@@ -223,7 +181,7 @@ public class deposit extends javax.swing.JFrame {
         int rows = pst.executeUpdate();
 
         if (rows > 0) {
-            // Record transaction (without username)
+           
           String insertSql = "INSERT INTO transactions(type, amount, date, username) VALUES (?, ?, CURRENT_TIMESTAMP, ?)";
 java.sql.PreparedStatement pstTrans = con.prepareStatement(insertSql);
 pstTrans.setString(1, "Deposit");
@@ -287,8 +245,6 @@ pstTrans.close();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField accname;
-    private javax.swing.JTextField accnum;
     private javax.swing.JButton backbtn;
     private javax.swing.JButton deposit;
     private javax.swing.JTextField depositAmount;
@@ -296,8 +252,6 @@ pstTrans.close();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
