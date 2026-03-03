@@ -55,7 +55,7 @@ public class registerAdmin extends javax.swing.JFrame {
         txtUsername.setText("Username");
 
         txtPin.setForeground(new java.awt.Color(204, 204, 204));
-        txtPin.setText("6-Digits Pin Code");
+        txtPin.setText("Password");
         txtPin.addActionListener(this::txtPinActionPerformed);
 
         loginbtn.setBackground(new java.awt.Color(31, 130, 44));
