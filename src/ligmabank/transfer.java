@@ -3,7 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ligmabank;
+import javax.swing.JOptionPane;      
+import java.util.logging.Logger;     
+import java.util.logging.Level;  
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+
+// For logging levels
 /**
  *
  * @author Main
@@ -19,6 +29,7 @@ private String username;
         initComponents();
          setLocationRelativeTo(null);
          this.username = username;
+         
     }
 
     /**
@@ -45,6 +56,7 @@ private String username;
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         backBTN = new javax.swing.JButton();
+        charge1 = new javax.swing.JLabel();
 
         selectBank.setBackground(new java.awt.Color(18, 30, 49));
         selectBank.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
@@ -53,7 +65,6 @@ private String username;
         selectBank.addActionListener(this::selectBankActionPerformed);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 800));
         setSize(new java.awt.Dimension(800, 800));
 
         jLabel4.setFont(new java.awt.Font("Accura-Black", 1, 60)); // NOI18N
@@ -140,6 +151,10 @@ private String username;
         backBTN.setName("login"); // NOI18N
         backBTN.addActionListener(this::backBTNActionPerformed);
 
+        charge1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        charge1.setForeground(new java.awt.Color(51, 255, 0));
+        charge1.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,6 +178,8 @@ private String username;
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(backBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(charge1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(banktransfersend, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(accname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
                 .addContainerGap())
@@ -192,7 +209,8 @@ private String username;
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(banktransfersend)
-                    .addComponent(backBTN))
+                    .addComponent(backBTN)
+                    .addComponent(charge1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -206,6 +224,40 @@ private String username;
 
     private void selectBank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBank1ActionPerformed
         // TODO add your handling code here:
+        
+         String bank = selectBank1.getSelectedItem().toString();
+    double charge = 0;
+
+    switch (bank) {
+
+        case "Maya Bank":
+            charge = 15;
+            break;
+
+        case "Gotyme Bank":
+            charge = 18;
+            break;
+
+        case "UNO Digital Bank":
+            charge = 0;
+            break;
+
+        case "G-Xchange, Inc.":
+            charge = 20;
+            break;
+
+        case "LIGMABANK":
+            charge = 5;
+            break;
+
+        default:
+            charge1.setText("");
+            return;
+    }
+
+    charge1.setText("Transfer Fee: ₱" + charge);
+        
+        
     }//GEN-LAST:event_selectBank1ActionPerformed
 
     private void accnumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnumActionPerformed
@@ -222,6 +274,87 @@ private String username;
 
     private void banktransfersendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_banktransfersendActionPerformed
         // TODO add your handling code here:
+       try {
+        String targetAccNum = accnum.getText().trim();
+        String targetAccName = accname.getText().trim();
+        String selectedBank = selectBank1.getSelectedItem().toString();
+        double amount = Double.parseDouble(bankTransferAmount.getText().trim());
+
+        // Input validation
+        if (targetAccNum.isEmpty() || targetAccName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter account number and name.",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (amount <= 0) {
+            JOptionPane.showMessageDialog(this, "Enter a valid amount.",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        
+        double fee = 0;
+        switch (selectedBank.trim()) {
+            case "Maya Bank": fee = 15; break;
+            case "Gotyme Bank": fee = 18; break;
+            case "UNO Digital Bank": fee = 0; break;
+            case "G-Xchange, Inc.": fee = 20; break;
+            case "LIGMABANK": fee = 5; break;
+        }
+
+        
+        double senderBalance = DBHelper.getBalance(username);
+        if (senderBalance < amount + fee) {
+            JOptionPane.showMessageDialog(this, "Insufficient funds for transfer.",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        
+        if (!DBHelper.accountExists(targetAccNum, targetAccName)) {
+            JOptionPane.showMessageDialog(this, "Target account not found.",
+                                          "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+       
+        DBHelper.withdraw(username, amount + fee);      
+        DBHelper.deposit(targetAccNum, amount);        
+
+        
+        DBHelper.logTransaction(username, "Bank Transfer", amount + fee);
+        DBHelper.logTransaction(targetAccNum, "Transfer Received", amount);
+
+        
+        JOptionPane.showMessageDialog(this, 
+            "Transfer successful!\nAmount: ₱" + amount + "\nFee: ₱" + fee,
+            "Success", JOptionPane.INFORMATION_MESSAGE);
+
+       
+        accnum.setText("");
+        accname.setText("");
+        bankTransferAmount.setText("");
+        selectBank1.setSelectedIndex(0);
+        charge1.setText("");
+
+       
+        Home home = new Home(username);
+        home.setVisible(true);
+        this.dispose();
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid numeric amount.",
+                                      "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(),
+                                      "Error", JOptionPane.ERROR_MESSAGE);
+        logger.log(Level.SEVERE, null, e);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(),
+                                      "Error", JOptionPane.ERROR_MESSAGE);
+        logger.log(Level.SEVERE, null, e);
+    }
+       
     }//GEN-LAST:event_banktransfersendActionPerformed
 
     private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
@@ -263,6 +396,7 @@ home.setVisible(true);
     private javax.swing.JButton backBTN;
     private javax.swing.JTextField bankTransferAmount;
     private javax.swing.JButton banktransfersend;
+    private javax.swing.JLabel charge1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

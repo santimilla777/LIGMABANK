@@ -32,12 +32,18 @@ private String accountNumber;
         this.username = username;
         initComponents();
         jLabel4.setText("Ayo, " + username + "!");
+        setResizable(true);
 
-       
-       transactionTableModel = new DefaultTableModel(new Object[]{"Type", "Amount", "Date"}, 0);
+       transactionTableModel = new DefaultTableModel(new Object[]{"Type", "Amount", "Date"}, 0) {
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false; 
+    }
+};
 transactionTable.setModel(transactionTableModel);
+      
 
-        // Load balance and transactions
+      
         loadBalance();
         if (this.accountNumber != null && !this.accountNumber.isEmpty()) {
             loadTransactions();
@@ -90,7 +96,7 @@ transactionTable.setModel(transactionTableModel);
         pst.setString(1, this.username);
         ResultSet rs = pst.executeQuery();
 
-        transactionTableModel.setRowCount(0); // clear table
+        transactionTableModel.setRowCount(0);
 
         while (rs.next()) {
             String type = rs.getString("type");
@@ -165,6 +171,7 @@ transactionTable.setModel(transactionTableModel);
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        submit = new javax.swing.JButton();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         logo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -188,6 +195,16 @@ transactionTable.setModel(transactionTableModel);
         jLabel8 = new javax.swing.JLabel();
         jScrollBar1 = new javax.swing.JScrollBar();
         accountNumber1 = new javax.swing.JLabel();
+        logoutBTN = new javax.swing.JButton();
+
+        submit.setBackground(new java.awt.Color(31, 130, 44));
+        submit.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        submit.setForeground(new java.awt.Color(179, 202, 179));
+        submit.setText("Submit");
+        submit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        submit.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        submit.setName("login"); // NOI18N
+        submit.addActionListener(this::submitActionPerformed);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -282,6 +299,7 @@ transactionTable.setModel(transactionTableModel);
         );
 
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1366, 768));
 
         jButton4.setBackground(new java.awt.Color(31, 130, 44));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/deposit.png"))); // NOI18N
@@ -332,7 +350,7 @@ transactionTable.setModel(transactionTableModel);
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(629, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,17 +402,18 @@ transactionTable.setModel(transactionTableModel);
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(100, 100, 100)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(82, 82, 82)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(109, 109, 109)
-                                .addComponent(jLabel8)))
-                        .addGap(10, 10, 10)))
+                                .addGap(146, 146, 146)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(116, 116, 116)
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -425,12 +444,21 @@ transactionTable.setModel(transactionTableModel);
         accountNumber1.setForeground(new java.awt.Color(255, 255, 255));
         accountNumber1.setText("AccNo.");
 
+        logoutBTN.setBackground(new java.awt.Color(31, 130, 44));
+        logoutBTN.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        logoutBTN.setForeground(new java.awt.Color(179, 202, 179));
+        logoutBTN.setText("Logout");
+        logoutBTN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        logoutBTN.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        logoutBTN.setName("login"); // NOI18N
+        logoutBTN.addActionListener(this::logoutBTNActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -440,11 +468,14 @@ transactionTable.setModel(transactionTableModel);
                         .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
-                                .addComponent(accountNumber1)))))
+                                .addComponent(accountNumber1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(logoutBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -457,12 +488,16 @@ transactionTable.setModel(transactionTableModel);
                         .addContainerGap()
                         .addComponent(accountNumber1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(logoutBTN)
+                                .addGap(23, 23, 23))))
                     .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -473,6 +508,8 @@ transactionTable.setModel(transactionTableModel);
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        new deposit(username).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -495,7 +532,7 @@ transactionTable.setModel(transactionTableModel);
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         
-       new withdraw(username).setVisible(true);
+       new Withdraw(username).setVisible(true);
        this.dispose();
         
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -505,6 +542,22 @@ transactionTable.setModel(transactionTableModel);
         new transfer(username).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        // TODO add your handling code here:
+        processLoan();
+    }//GEN-LAST:event_submitActionPerformed
+
+    private void logoutBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBTNActionPerformed
+         
+    
+    this.dispose();
+
+    
+    new login().setVisible(true);
+        // TODO add your handling code here
+
+    }//GEN-LAST:event_logoutBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -550,6 +603,8 @@ transactionTable.setModel(transactionTableModel);
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logo;
+    private javax.swing.JButton logoutBTN;
+    private javax.swing.JButton submit;
     private javax.swing.JTable transactionTable;
     // End of variables declaration//GEN-END:variables
 

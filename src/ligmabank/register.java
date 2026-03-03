@@ -24,6 +24,7 @@ public class register extends javax.swing.JFrame {
      */
     public register() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

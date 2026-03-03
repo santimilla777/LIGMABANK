@@ -35,7 +35,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="backBTN" min="-2" pref="121" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="deposit" min="-2" pref="121" max="-2" attributes="0"/>
+                      <Component id="submit" min="-2" pref="121" max="-2" attributes="0"/>
                   </Group>
                   <Component id="accnum3" alignment="1" pref="776" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -84,7 +84,7 @@
               <Component id="accnum" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="deposit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="submit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="backBTN" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -200,7 +200,7 @@
         <Property name="text" type="java.lang.String" value="Address:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="deposit">
+    <Component class="javax.swing.JButton" name="submit">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="2c" green="82" red="1f" type="rgb"/>
@@ -223,7 +223,7 @@
         <Property name="name" type="java.lang.String" value="login" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="depositActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="accnum3">

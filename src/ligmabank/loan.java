@@ -20,6 +20,75 @@ private String username;
          setLocationRelativeTo(null);
          this.username = username;
     }
+    
+    private void processLoan() {
+    // Get input values
+    String name = accnum2.getText().trim();
+    String address = accnum3.getText().trim();
+    String phone = accnum1.getText().trim();
+    String amountStr = accnum.getText().trim();
+
+    if(name.isEmpty() || address.isEmpty() || phone.isEmpty() || amountStr.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields!");
+        return;
+    }
+
+    double amount;
+    try {
+        amount = Double.parseDouble(amountStr);
+        if(amount <= 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Loan amount must be positive!");
+            return;
+        }
+    } catch(NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid loan amount!");
+        return;
+    }
+
+    try {
+        java.sql.Connection con = DbConnection.getConnection();
+        
+        String sql = "INSERT INTO loans(username, name, address, phone, amount, status) VALUES(?, ?, ?, ?, ?, ?)";
+        java.sql.PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, username);
+        pst.setString(2, name);
+        pst.setString(3, address);
+        pst.setString(4, phone);
+        pst.setDouble(5, amount);
+        pst.setString(6, "Pending"); 
+
+        int rows = pst.executeUpdate();
+        if(rows > 0){
+            javax.swing.JOptionPane.showMessageDialog(this, "Loan application submitted successfully!");
+           
+            accnum.setText("");
+            accnum1.setText("");
+            accnum2.setText("");
+            accnum3.setText("");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Failed to submit loan application.");
+        }
+
+        pst.close();
+        con.close();
+    } catch(Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+    }
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,7 +107,7 @@ private String username;
         jLabel8 = new javax.swing.JLabel();
         accnum2 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        deposit = new javax.swing.JButton();
+        submit = new javax.swing.JButton();
         accnum3 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -46,7 +115,6 @@ private String username;
         backBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 800));
 
@@ -87,14 +155,14 @@ private String username;
         jLabel9.setForeground(new java.awt.Color(179, 202, 179));
         jLabel9.setText("Address:");
 
-        deposit.setBackground(new java.awt.Color(31, 130, 44));
-        deposit.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
-        deposit.setForeground(new java.awt.Color(179, 202, 179));
-        deposit.setText("Submit");
-        deposit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        deposit.setMargin(new java.awt.Insets(3, 14, 3, 12));
-        deposit.setName("login"); // NOI18N
-        deposit.addActionListener(this::depositActionPerformed);
+        submit.setBackground(new java.awt.Color(31, 130, 44));
+        submit.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        submit.setForeground(new java.awt.Color(179, 202, 179));
+        submit.setText("Submit");
+        submit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        submit.setMargin(new java.awt.Insets(3, 14, 3, 12));
+        submit.setName("login"); // NOI18N
+        submit.addActionListener(this::submitActionPerformed);
 
         accnum3.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
         accnum3.setForeground(new java.awt.Color(179, 202, 179));
@@ -145,7 +213,7 @@ private String username;
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(backBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(accnum3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +254,7 @@ private String username;
                 .addComponent(accnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deposit)
+                    .addComponent(submit)
                     .addComponent(backBTN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -212,43 +280,10 @@ private String username;
         // TODO add your handling code here:
     }//GEN-LAST:event_accnum2ActionPerformed
 
-    private void depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositActionPerformed
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
-        String username = depositAmount.getText().trim();
-        String userpinStr = new String(upin.getPassword()).trim();
-
-        if(username.isEmpty() || userpinStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter Username and PIN!");
-            return;
-        }
-
-        try {
-            int userpin = Integer.parseInt(userpinStr);
-
-            Connection con = DbConnection.getConnection();
-            String sql = "SELECT * FROM register WHERE username = ? AND pin = ?";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, username);
-            pst.setInt(2, userpin);
-
-            java.sql.ResultSet rs = pst.executeQuery();
-
-            if(rs.next()){
-                Home home = new Home(username);
-                home.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid Username or PIN!");
-            }
-
-            con.close();
-        } catch(NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this, "PIN must be numeric!");
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Database error! Check connection and credentials.");
-        }
-    }//GEN-LAST:event_depositActionPerformed
+        processLoan();
+    }//GEN-LAST:event_submitActionPerformed
 
     private void accnum3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accnum3ActionPerformed
         // TODO add your handling code here:
@@ -293,7 +328,6 @@ private String username;
     private javax.swing.JTextField accnum2;
     private javax.swing.JTextField accnum3;
     private javax.swing.JButton backBTN;
-    private javax.swing.JButton deposit;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -302,5 +336,6 @@ private String username;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
 }
