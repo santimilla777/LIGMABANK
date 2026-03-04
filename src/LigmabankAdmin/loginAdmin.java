@@ -200,39 +200,47 @@ public class loginAdmin extends javax.swing.JFrame {
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
         // TODO add your handling code here:
-        String username = uname.getText().trim();
-    String userpinStr = new String(upin.getPassword()).trim();
+       String username = uname.getText().trim();
+    String password = new String(upin.getPassword()).trim();
 
-    if(username.isEmpty() || userpinStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please enter Username and PIN!");
+    if(username.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please enter Username and Password!");
         return;
     }
 
-    try {
-        int userpin = Integer.parseInt(userpinStr);
+    try (Connection con = DbConnection.getConnection()) {
 
-        Connection con = DbConnection.getConnection();
-        String sql = "SELECT * FROM register WHERE username = ? AND pin = ?";
+        if(con == null){
+            JOptionPane.showMessageDialog(this, "Database connection failed!");
+            return;
+        }
+
+        String sql = "SELECT * FROM admin WHERE username = ? AND password = ?";
         PreparedStatement pst = con.prepareStatement(sql);
+
         pst.setString(1, username);
-        pst.setInt(2, userpin); 
+        pst.setString(2, password);
 
         java.sql.ResultSet rs = pst.executeQuery();
 
-        if(rs.next()){ 
-           Home home = new Home(username);
-           home.setVisible(true);
-           this.dispose();
+        if(rs.next()) {
+
+            JOptionPane.showMessageDialog(this, "Login Successful!");
+
+            // Open Admin Dashboard
+            new dashboardAdmin().setVisible(true);
+            this.dispose();
+
         } else {
-            JOptionPane.showMessageDialog(this, "Invalid Username or PIN!");
+            JOptionPane.showMessageDialog(this, "Invalid Username or Password!");
         }
 
-        con.close();
-    } catch(NumberFormatException nfe) {
-        JOptionPane.showMessageDialog(this, "PIN must be numeric!");
+        rs.close();
+        pst.close();
+
     } catch (Exception e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Database error! Check connection and credentials.");
+        JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
     }
      
     }//GEN-LAST:event_loginbtnActionPerformed
