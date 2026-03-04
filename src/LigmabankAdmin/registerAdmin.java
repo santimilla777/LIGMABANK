@@ -138,44 +138,50 @@ public class registerAdmin extends javax.swing.JFrame {
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
 
-        String email = txtEmail.getText().trim();
-        String username = txtUsername.getText().trim();
-        String pinStr = txtPin.getText().trim();
+       String email = txtEmail.getText().trim();
+    String username = txtUsername.getText().trim();
+    String password = txtPin.getText().trim();
 
-        if(email.isEmpty() || username.isEmpty() || pinStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill all fields!");
+   
+    if(email.isEmpty() || username.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill all fields!");
+        return;
+    }
+
+    try (Connection con = DbConnection.getConnection()) {
+
+        if(con == null) {
+            JOptionPane.showMessageDialog(this, "Database connection failed!");
             return;
         }
 
-        try (Connection con = DbConnection.getConnection()) {
- 
-            if(con == null) {
-                JOptionPane.showMessageDialog(this, "Database connection failed!");
-                return;
-            }
+        String sql = "INSERT INTO admin (email, username, password) VALUES (?, ?, ?)";
+        PreparedStatement pst = con.prepareStatement(sql);
 
-            String sql = "INSERT INTO register (email, username, pin, balance) VALUES (?, ?, ?, ?)";
-            PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, email);
+        pst.setString(2, username);
+        pst.setString(3, password);
 
-            pst.setString(1, email);
-            pst.setString(2, username);
-            pst.setInt(3, Integer.parseInt(pinStr));
-            pst.setDouble(4, 0.00);
+        int rows = pst.executeUpdate();
 
-            int rows = pst.executeUpdate();
-            if(rows > 0) {
-                JOptionPane.showMessageDialog(this, "Registered Successfully!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Registration failed!");
-            }
+        if(rows > 0) {
+            JOptionPane.showMessageDialog(this, "Admin registered successfully!");
 
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this, "PIN must be a number!");
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            // Clear fields
+            txtEmail.setText("");
+            txtUsername.setText("");
+            txtPin.setText("");
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Registration failed!");
         }
 
+        pst.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
     }//GEN-LAST:event_registerActionPerformed
 
     /**
@@ -188,7 +194,7 @@ public class registerAdmin extends javax.swing.JFrame {
         FlatDarkLaf.setup();
         
         java.awt.EventQueue.invokeLater(() -> {
-        login frame = new login();
+        registerAdmin frame = new registerAdmin();
         frame.setTitle("Ligmabank: Login");
          frame.setIconImage(new javax.swing.ImageIcon(
             frame.getClass().getResource("/images/ligmabank logo emblem.png")).getImage()
