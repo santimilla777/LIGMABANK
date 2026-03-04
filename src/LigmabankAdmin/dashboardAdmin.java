@@ -6,6 +6,12 @@ package LigmabankAdmin;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import ligmabank.login;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
+import ligmabank.DBHelper;
 
 /**
  *
@@ -20,8 +26,64 @@ public class dashboardAdmin extends javax.swing.JFrame {
      */
     public dashboardAdmin() {
         initComponents();
+         loadTotalDeposit();
+    loadTotalTransactions();
+    loadTotalUsers();
     }
 
+    
+    
+    private void loadTotalDeposit() {
+    String sql = "SELECT SUM(balance) AS totalDeposit FROM register";
+    try (Connection con = ligmabank.DBHelper.getConnection();
+         PreparedStatement pst = con.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+        if (rs.next()) {
+            double totalDeposit = rs.getDouble("totalDeposit");
+            jLabel8.setText(String.format("%,.2f", totalDeposit)); // formatted with commas
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error fetching total deposit: " + e.getMessage());
+    }
+}
+    
+    
+    
+private void loadTotalTransactions() {
+    String sql = "SELECT COUNT(*) AS totalTrans FROM transactions";
+    try (Connection con = ligmabank.DBHelper.getConnection();
+         PreparedStatement pst = con.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+        if (rs.next()) {
+            int totalTrans = rs.getInt("totalTrans");
+            jLabel9.setText(String.format("%,d", totalTrans));
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error fetching total transactions: " + e.getMessage());
+    }
+}    
+    
+    
+private void loadTotalUsers() {
+    String sql = "SELECT COUNT(*) AS totalUsers FROM register";
+    try (Connection con = ligmabank.DBHelper.getConnection();
+         PreparedStatement pst = con.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+        if (rs.next()) {
+            int totalUsers = rs.getInt("totalUsers");
+            jLabel11.setText(String.format("%,d", totalUsers));
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error fetching total users: " + e.getMessage());
+    }
+}    
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -332,6 +394,9 @@ public class dashboardAdmin extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        
+        new loginAdmin().setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

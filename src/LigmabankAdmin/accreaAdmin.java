@@ -6,6 +6,11 @@ package LigmabankAdmin;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import ligmabank.login;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import ligmabank.DbConnection;
 
 /**
  *
@@ -350,6 +355,89 @@ public class accreaAdmin extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        
+          
+    String email = jTextField2.getText().trim();
+    String username = jTextField3.getText().trim();
+    String pin = jTextField4.getText().trim();
+    String confirmPin = jTextField1.getText().trim();
+
+    
+    if(email.isEmpty() || username.isEmpty() || pin.isEmpty() || confirmPin.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill all fields!");
+        return;
+    }
+
+    
+    if(!pin.matches("\\d{6}")) {
+        JOptionPane.showMessageDialog(this, "PIN must be exactly 6 digits!");
+        return;
+    }
+
+    
+    if(!pin.equals(confirmPin)) {
+        JOptionPane.showMessageDialog(this, "PIN does not match!");
+        return;
+    }
+
+    try (Connection con = DbConnection.getConnection()) {
+
+        if(con == null) {
+            JOptionPane.showMessageDialog(this, "Database connection failed!");
+            return;
+        }
+
+      
+        String checkSql = "SELECT account_no FROM register WHERE username = ?";
+        PreparedStatement checkPst = con.prepareStatement(checkSql);
+        checkPst.setString(1, username);
+
+        ResultSet rs = checkPst.executeQuery();
+
+        if(rs.next()) {
+            JOptionPane.showMessageDialog(this, "Username already exists!");
+            rs.close();
+            checkPst.close();
+            return;
+        }
+
+        rs.close();
+        checkPst.close();
+
+        
+        String sql = "INSERT INTO register (email, username, pin, balance) VALUES (?, ?, ?, ?)";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1, email);
+        pst.setString(2, username);
+        pst.setString(3, pin);
+        pst.setDouble(4, 0.00);
+
+        int result = pst.executeUpdate();
+
+        if(result > 0) {
+
+            JOptionPane.showMessageDialog(this, "User account created successfully!");
+
+            // Clear fields
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
+            jTextField1.setText("");
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to create account!");
+        }
+
+        pst.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
+        
+        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed

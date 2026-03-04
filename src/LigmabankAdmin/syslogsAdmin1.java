@@ -5,7 +5,15 @@
 package LigmabankAdmin;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import ligmabank.DBHelper;
 import ligmabank.login;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,8 +28,33 @@ public class syslogsAdmin1 extends javax.swing.JFrame {
      */
     public syslogsAdmin1() {
         initComponents();
+     
+    loadSystemLogs();
     }
 
+   private void loadSystemLogs() {
+    try (Connection conn = DBHelper.getConnection();
+         PreparedStatement ps = conn.prepareStatement("SELECT action, username, log_date FROM system_logs ORDER BY log_date DESC");
+         ResultSet rs = ps.executeQuery()) {
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        while (rs.next()) {
+            Object[] row = { rs.getString("action"), rs.getString("username"), rs.getTimestamp("log_date") };
+            model.addRow(row);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error loading system logs: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

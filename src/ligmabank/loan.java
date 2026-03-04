@@ -23,12 +23,12 @@ private String username;
     
     private void processLoan() {
     // Get input values
-    String name = accnum2.getText().trim();
-    String address = accnum3.getText().trim();
-    String phone = accnum1.getText().trim();
-    String amountStr = accnum.getText().trim();
+    String name = accnum1.getText().trim();     
+String purpose = accnum2.getText().trim(); 
+String phone = accnum3.getText().trim();    
+String amountStr = accnum.getText().trim();
 
-    if(name.isEmpty() || address.isEmpty() || phone.isEmpty() || amountStr.isEmpty()) {
+    if(name.isEmpty() || purpose.isEmpty() || phone.isEmpty() || amountStr.isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields!");
         return;
     }
@@ -48,14 +48,14 @@ private String username;
     try {
         java.sql.Connection con = DbConnection.getConnection();
         
-        String sql = "INSERT INTO loans(username, name, address, phone, amount, status) VALUES(?, ?, ?, ?, ?, ?)";
-        java.sql.PreparedStatement pst = con.prepareStatement(sql);
-        pst.setString(1, username);
-        pst.setString(2, name);
-        pst.setString(3, address);
-        pst.setString(4, phone);
-        pst.setDouble(5, amount);
-        pst.setString(6, "Pending"); 
+       String sql = "INSERT INTO loans(username, name, purpose, phone, amount, status) VALUES(?, ?, ?, ?, ?, ?)";
+java.sql.PreparedStatement pst = con.prepareStatement(sql);
+pst.setString(1, username);
+pst.setString(2, name);
+pst.setString(3, purpose);
+pst.setString(4, phone);
+pst.setDouble(5, amount);
+pst.setString(6, "Pending");
 
         int rows = pst.executeUpdate();
         if(rows > 0){

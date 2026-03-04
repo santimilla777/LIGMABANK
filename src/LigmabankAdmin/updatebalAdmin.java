@@ -5,6 +5,7 @@
 package LigmabankAdmin;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import ligmabank.DBHelper;
 import ligmabank.login;
 
 /**
@@ -22,6 +23,85 @@ public class updatebalAdmin extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    private void updateBalance() {
+    String accNum = jTextField2.getText().trim(); // Account Number
+    String amountStr = jTextField3.getText().trim(); // Amount to add
+    String adminPass = jTextField1.getText().trim(); // Admin password
+
+    if(accNum.isEmpty() || amountStr.isEmpty() || adminPass.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields!");
+        return;
+    }
+
+    double amount;
+    try {
+        amount = Double.parseDouble(amountStr);
+        if(amount <= 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount must be positive!");
+            return;
+        }
+    } catch(NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount!");
+        return;
+    }
+
+    try (java.sql.Connection con = DBHelper.getConnection()) {
+
+        
+        String adminCheck = "SELECT * FROM admin WHERE password = ?";
+        try (java.sql.PreparedStatement pst = con.prepareStatement(adminCheck)) {
+            pst.setString(1, adminPass);
+            try (java.sql.ResultSet rs = pst.executeQuery()) {
+                if(!rs.next()) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Invalid admin password!");
+                    return;
+                }
+            }
+        }
+
+        
+        String accCheck = "SELECT balance FROM register WHERE account_no = ?";
+        double currentBalance;
+        try (java.sql.PreparedStatement pst = con.prepareStatement(accCheck)) {
+            pst.setString(1, accNum);
+            try (java.sql.ResultSet rs = pst.executeQuery()) {
+                if(!rs.next()) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Account not found!");
+                    return;
+                }
+                currentBalance = rs.getDouble("balance");
+            }
+        }
+
+        
+        String updateSQL = "UPDATE register SET balance = ? WHERE account_no = ?";
+        try (java.sql.PreparedStatement pst = con.prepareStatement(updateSQL)) {
+            pst.setDouble(1, currentBalance + amount);
+            pst.setString(2, accNum);
+            int rows = pst.executeUpdate();
+            if(rows > 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Balance updated successfully!");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField1.setText("");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Failed to update balance.");
+            }
+        }
+
+    } catch(Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+    }
+}
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -297,6 +377,7 @@ public class updatebalAdmin extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+          updateBalance();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

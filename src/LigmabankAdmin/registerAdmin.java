@@ -142,7 +142,7 @@ public class registerAdmin extends javax.swing.JFrame {
     String username = txtUsername.getText().trim();
     String password = txtPin.getText().trim();
 
-    // Check if empty
+   
     if(email.isEmpty() || username.isEmpty() || password.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please fill all fields!");
         return;

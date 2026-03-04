@@ -7,6 +7,14 @@ package LigmabankAdmin;
 import com.formdev.flatlaf.FlatDarkLaf;
 import ligmabank.login;
 
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alejandro
@@ -22,6 +30,48 @@ public class useraccAdmin extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void updateUserBalance(String accountNumber, double newBalance, String adminPass) {
+    // Basic validation
+    if(accountNumber.isEmpty() || adminPass.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Account number and admin password are required.");
+        return;
+    }
+
+   
+    String correctAdminPass = "admin123";
+    if(!adminPass.equals(correctAdminPass)) {
+        JOptionPane.showMessageDialog(this, "Incorrect admin password!");
+        return;
+    }
+
+   
+    String url = "jdbc:mysql://localhost:3306/lbank"; // change DB name & host
+    String user = "root";
+    String password = "";
+    String sql = "UPDATE register SET balance = ? WHERE account_no = ?";
+
+    try (Connection conn = DriverManager.getConnection(url, user, password);
+         PreparedStatement pst = conn.prepareStatement(sql)) {
+
+        pst.setDouble(1, newBalance);
+        pst.setString(2, accountNumber);
+
+        int affectedRows = pst.executeUpdate();
+
+        if(affectedRows > 0) {
+            JOptionPane.showMessageDialog(this, "Balance updated successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Account not found!");
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error updating balance: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

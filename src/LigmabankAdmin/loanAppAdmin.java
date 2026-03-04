@@ -5,7 +5,18 @@
 package LigmabankAdmin;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import javax.swing.table.DefaultTableModel;
 import ligmabank.login;
+
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import ligmabank.DBHelper;
+
+
 
 /**
  *
@@ -20,8 +31,87 @@ public class loanAppAdmin extends javax.swing.JFrame {
      */
     public loanAppAdmin() {
         initComponents();
+        loadLoanApplications();
     }
 
+    
+    private void loadLoanApplications() {
+
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
+
+    String sql = "SELECT username, phone, purpose, amount, status FROM loans";
+
+    try (Connection con = DBHelper.getConnection();
+         PreparedStatement pst = con.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+
+        int count = 0;
+        while (rs.next()) {
+            Object[] row = {
+                rs.getString("username"),
+                rs.getString("phone"),
+                rs.getString("purpose"),
+                rs.getDouble("amount"),
+                rs.getString("status")
+            };
+            model.addRow(row);
+            count++;
+        }
+
+        System.out.println("Rows loaded: " + count);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error loading loans: " + e.getMessage());
+    }
+}
+    
+    
+    private void updateLoanStatus(String username, String newStatus) {
+        String updateLoanSql = "UPDATE loans SET status = ? WHERE username = ? AND status = 'Pending'";
+    String getAmountSql = "SELECT amount FROM loans WHERE username = ? AND status = 'Pending'";
+    String updateBalanceSql = "UPDATE register SET balance = balance + ? WHERE username = ?";
+
+    try (Connection con = DBHelper.getConnection()) {
+        con.setAutoCommit(false);
+
+        if(newStatus.equalsIgnoreCase("Approved")) {
+            try (PreparedStatement pstAmount = con.prepareStatement(getAmountSql)) {
+                pstAmount.setString(1, username);
+                try (ResultSet rs = pstAmount.executeQuery()) {
+                    if(rs.next()) {
+                        double loanAmount = rs.getDouble("amount");
+                        try (PreparedStatement pstBal = con.prepareStatement(updateBalanceSql)) {
+                            pstBal.setDouble(1, loanAmount);
+                            pstBal.setString(2, username);
+                            pstBal.executeUpdate();
+                        }
+                    }
+                }
+            }
+        }
+
+        try (PreparedStatement pst = con.prepareStatement(updateLoanSql)) {
+            pst.setString(1, newStatus);
+            pst.setString(2, username);
+            int rows = pst.executeUpdate();
+            if(rows > 0) {
+                con.commit();
+                JOptionPane.showMessageDialog(this, "Loan " + newStatus.toLowerCase() + " successfully!");
+                loadLoanApplications();
+            } else {
+                con.rollback();
+                JOptionPane.showMessageDialog(this, "Failed to update loan.");
+            }
+        }
+
+    } catch(Exception e) {
+        JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -193,17 +283,17 @@ public class loanAppAdmin extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Username", "Phone Number", "Purpose", "Amount"
+                "Username", "Phone Number", "Purpose", "Amount", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -297,10 +387,33 @@ public class loanAppAdmin extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
+        
+        int row = jTable1.getSelectedRow();
+
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Select a loan first!");
+        return;
+    }
+
+    String username = jTable1.getValueAt(row, 0).toString();
+
+    updateLoanStatus(username, "Approved");
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
+        
+         int row = jTable1.getSelectedRow();
+
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Select a loan first!");
+        return;
+    }
+
+    String username = jTable1.getValueAt(row, 0).toString();
+
+    updateLoanStatus(username, "Rejected");
+        
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
